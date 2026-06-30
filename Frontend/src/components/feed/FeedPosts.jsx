@@ -8,7 +8,7 @@ const FeedPosts = ({ posts, fetchPosts }) => {
 
   const handleLike = async (id) => {
     await axios.patch(
-      `http://localhost:3000/api/post/${id}/likes`,
+      `https://connectx-evdy.onrender.com/api/post/${id}/likes`,
       {},
       { withCredentials: true }
     );
@@ -22,7 +22,7 @@ const FeedPosts = ({ posts, fetchPosts }) => {
     const formData = new FormData(e.target);
 
     await axios.post(
-      `http://localhost:3000/api/post/${postId}/comment`,
+      `https://connectx-evdy.onrender.com/api/post/${postId}/comment`,
       {
         text: formData.get("comment"),
       },
@@ -35,7 +35,7 @@ const FeedPosts = ({ posts, fetchPosts }) => {
 
   const deleteComment = async (postId, commentId) => {
     await axios.delete(
-      `http://localhost:3000/api/post/${postId}/comment/${commentId}`,
+      `https://connectx-evdy.onrender.com/api/post/${postId}/comment/${commentId}`,
       { withCredentials: true }
     );
 

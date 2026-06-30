@@ -19,7 +19,7 @@ const SuggestedPeople = () => {
   const fetchUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/user/all",
+        "https://connectx-evdy.onrender.com/api/user/all",
         {
           withCredentials: true,
         }
@@ -50,7 +50,7 @@ const suggested = res.data.users.filter(
   
     try {
       await axios.post(
-        `http://localhost:3000/api/user/${id}/user`,
+        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
         {},
         {
           withCredentials: true,

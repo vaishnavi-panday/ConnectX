@@ -14,7 +14,7 @@ import ChatList from './components/ChatList'
 import Features from './pages/Features'
 import Community from './pages/Community'
 import About from './pages/About'
-import Contact from './pages/Contact'
+
 const App = () => {
   return (
     <div>
@@ -34,7 +34,7 @@ const App = () => {
         <Route path="/features" element={<Features />} />
         <Route path='/community' element={<Community/>}/>
          <Route path='/about' element={<About/>}/>
-         <Route path='/contact' element={<Contact/>}/>
+         
     
       </Routes>
     </div>

@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 let socket = null;
 
 export const connectSocket = (userId) => {
-  socket = io("http://localhost:3000", {
+  socket = io("https://connectx-evdy.onrender.com", {
     query: {
       userId,
     },

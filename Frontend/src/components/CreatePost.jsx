@@ -13,7 +13,7 @@ const CreatePost = () => {
 
       const formData = new FormData(e.target);
 
-      await axios.post("http://localhost:3000/api/post/create", formData, {
+      await axios.post("https://connectx-evdy.onrender.com/api/post/create", formData, {
         withCredentials: true,
       });
 

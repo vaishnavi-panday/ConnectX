@@ -15,7 +15,7 @@ const Login = () => {
         password:formData.get('password')
       }
       try{
-      await axios.post("http://localhost:3000/api/auth/login" , data , {
+      await axios.post("https://connectx-evdy.onrender.com/api/auth/login" , data , {
         withCredentials:true
       })
       await checkUser();

@@ -16,7 +16,7 @@ const fetchChats = async () => {
     try {
 
         const res = await axios.get(
-            "http://localhost:3000/api/message/chats",
+            "https://connectx-evdy.onrender.com/api/message/chats",
             {
                 withCredentials: true,
             }

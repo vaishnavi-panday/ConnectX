@@ -23,7 +23,7 @@ const ChatPage = () => {
   const fetchMessages = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/message/${id}/chat`,
+        `https://connectx-evdy.onrender.com/api/message/${id}/chat`,
         {
           withCredentials: true,
         }
@@ -38,7 +38,7 @@ const ChatPage = () => {
   const fetchReceiver = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/user/${id}/user`,
+        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
         {
           withCredentials: true,
         }
@@ -73,7 +73,7 @@ if(file){
 }
 console.log(file)
  await axios.post(
-    `http://localhost:3000/api/message/${id}/chat`,
+    `https://connectx-evdy.onrender.com/api/message/${id}/chat`,
     formData,
     {
         withCredentials: true
@@ -93,7 +93,7 @@ console.log(file)
     try {
 
         await axios.delete(
-            `http://localhost:3000/api/message/${messageId}`,
+            `https://connectx-evdy.onrender.com/api/message/${messageId}`,
             {
                 withCredentials: true,
             }
@@ -109,7 +109,7 @@ console.log(file)
 };
 const handleDeleteForMe = async(messageId)=>{
     try{
-    await axios.patch(`http://localhost:3000/api/message/${messageId}`,{},{
+    await axios.patch(`https://connectx-evdy.onrender.com/api/message/${messageId}`,{},{
         withCredentials:true
     })
     setMessages((prev)=>{
@@ -122,7 +122,7 @@ const handleReaction = async (messageId, emoji) => {
     try {
 
         const res = await axios.patch(
-            `http://localhost:3000/api/message/${messageId}/react`,
+            `https://connectx-evdy.onrender.com/api/message/${messageId}/react`,
             {
                 reaction: emoji
             },
@@ -155,7 +155,7 @@ useEffect(() => {
         await fetchMessages();
 
         await axios.patch(
-            `http://localhost:3000/api/message/seen/${id}`,
+            `https://connectx-evdy.onrender.com/api/message/seen/${id}`,
             {},
             {
                 withCredentials: true

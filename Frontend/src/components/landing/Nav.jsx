@@ -34,12 +34,7 @@ const Nav = () => {
     About
   </span>
 
-  <span
-    onClick={() => navigate("/contact")}
-    className="cursor-pointer hover:text-[#FF7F66] transition"
-  >
-    Contact
-  </span>
+  
 
 
     </div>

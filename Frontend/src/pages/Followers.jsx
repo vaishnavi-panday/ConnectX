@@ -11,7 +11,7 @@ const Followers = () => {
   const fetchFollowers = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/user/${id}/followers`,
+        `https://connectx-evdy.onrender.com/api/user/${id}/followers`,
         { withCredentials: true }
       );
 

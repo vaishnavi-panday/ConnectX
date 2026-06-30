@@ -15,7 +15,7 @@ const Profile = () => {
   const fetchProfile = async () => {
     try {
       const userRes = await axios.get(
-        `http://localhost:3000/api/user/${id}/user`,
+        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
         {
           withCredentials: true,
         },
@@ -24,7 +24,7 @@ const Profile = () => {
       setUser(userRes.data.details);
 
       const postRes = await axios.get(
-        `http://localhost:3000/api/post/${id}/user`,
+        `https://connectx-evdy.onrender.com/api/post/${id}/user`,
         {
           withCredentials: true,
         },
@@ -43,7 +43,7 @@ const Profile = () => {
   const handleFollow = async () => {
     try {
       await axios.post(
-        `http://localhost:3000/api/user/${id}/user`,
+        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
         {},
         {
           withCredentials: true,
@@ -65,7 +65,7 @@ const Profile = () => {
   }
   const HandleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/post/${id}/post`, {
+      await axios.delete(`https://connectx-evdy.onrender.com/api/post/${id}/post`, {
         withCredentials: true,
       });
       fetchProfile();

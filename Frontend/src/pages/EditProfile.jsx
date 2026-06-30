@@ -23,7 +23,7 @@ const EditProfile = () => {
       }
 
       await axios.put(
-        `http://localhost:3000/api/user/updateprofile/${user.id}`,
+        `https://connectx-evdy.onrender.com/api/user/updateprofile/${user.id}`,
         formData,
         {
           withCredentials: true,

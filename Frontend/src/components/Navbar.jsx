@@ -24,7 +24,7 @@ const Navbar = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/user/search?q=${value}`,
+        `https://connectx-evdy.onrender.com/api/user/search?q=${value}`,
         { withCredentials: true }
       );
 
@@ -37,7 +37,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3000/api/auth/logout",
+        "https://connectx-evdy.onrender.com/api/auth/logout",
         {},
         { withCredentials: true }
       );
