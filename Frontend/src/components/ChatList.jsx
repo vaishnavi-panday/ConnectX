@@ -17,6 +17,8 @@ const ChatList = () => {
       );
 
       setChats(res.data.chat);
+      console.log(res.data.chat);
+      
     } catch (error) {
       console.log(error);
     }
@@ -59,12 +61,13 @@ const ChatList = () => {
           </div>
         ) : (
           chats.map((chat) => (
+            
             <div
               key={chat._id}
               onClick={() => navigate(`/chat/${chat._id}`)}
               className="flex items-center gap-4 p-4 border-b border-[#FFE5D8] cursor-pointer transition hover:bg-[#FFF5EF] hover:scale-[1.01]"
             >
-
+             
               
               <div className="relative">
                 <img

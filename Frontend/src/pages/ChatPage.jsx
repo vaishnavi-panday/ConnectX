@@ -19,6 +19,7 @@ const ChatPage = () => {
   const [file, setFile] = useState(null)
   const typingTimeout = useRef(null);
   const emojis = ["❤️", "😂", "👍", "🔥", "😢", "😮"];
+  console.log("chat id" , id);
   
   const fetchMessages = async () => {
     try {
