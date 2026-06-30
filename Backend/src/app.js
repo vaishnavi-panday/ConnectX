@@ -13,7 +13,7 @@ const server = http.createServer(app)
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "https://connect-x-flax.vercel.app/",
+    origin: ["https://connect-x-flax.vercel.app/" , "http://localhost:5173"],
     credentials: true
 }))
 app.use('/api/auth' , authRoutes)
