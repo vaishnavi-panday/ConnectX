@@ -13,7 +13,9 @@ const Register = () => {
  const HandleSubmit =  async(e)=>{
       e.preventDefault();
       const formData = new FormData(e.target)
-       await axios.post("https://connectx-evdy.onrender.com/api/auth/register" , formData)
+       await axios.post("https://connectx-evdy.onrender.com/api/auth/register" , formData ,  {
+    withCredentials: true,
+  })
       navigate('/feed')
   }
 
