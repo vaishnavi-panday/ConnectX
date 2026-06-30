@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 async function authUser(req,res,next){
 const token = req.cookies.token;
-console.log(req.cookies.token)
+console.log("token" , token)
     if(!token){
         return res.status(401).json({
             message:"invalid user"
@@ -14,6 +14,7 @@ console.log(req.cookies.token)
                 message:"unauthorized"
             })
         }
+        console.log("DECODED:", decoded);
         req.user = decoded;
         next()
      }catch(error){

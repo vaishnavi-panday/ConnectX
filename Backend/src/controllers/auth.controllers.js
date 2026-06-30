@@ -39,7 +39,7 @@ async function registerUser(req,res){
   secure: true,
   sameSite: "none"});
     res.status(201).json({
-        message:"user registered successfully",
+        message:"user registered successfully version 2",
         user:{
             id:user._id,
             username : user.username,
