@@ -34,8 +34,8 @@ async function registerUser(req,res){
         id:user._id
     },process.env.JWT_SECRET_KEY,{expiresIn:'7d'})
     res.cookie("token", token ,  {httpOnly: true,
-  secure: false,
-  sameSite: "lax"});
+  secure: true,
+  sameSite: "none"});
     res.status(201).json({
         message:"user registered successfully",
         user:{
@@ -73,8 +73,8 @@ async function loginUser(req,res){
         id:user._id
     },process.env.JWT_SECRET_KEY,{expiresIn:'7d'})
     res.cookie("token",token , {httpOnly: true,
-  secure: false,
-  sameSite: "lax"})
+  secure: true,
+  sameSite: "none"})
     res.status(200).json({
         message:"logged in successfully",
         
