@@ -1,6 +1,6 @@
 import { Bell, Search } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-
+import { quotes } from "../../data/quotes";
 const FeedHero = () => {
 
     const { user } = useAuth();
@@ -13,7 +13,8 @@ const FeedHero = () => {
             : hour < 18
             ? "Good Afternoon 🌤️"
             : "Good Evening 🌙";
-
+   const randomQuote =
+  quotes[Math.floor(Math.random() * quotes.length)];
     return (
         <section className="relative overflow-hidden">
 
@@ -65,15 +66,31 @@ const FeedHero = () => {
 
                     <div className="mt-12 relative">
 
-                        <Search
-                            className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"
-                            size={22}
-                        />
+                        <div className="mt-12">
 
-                        <input
-                            placeholder="Search people, posts, hashtags..."
-                            className="w-full bg-white rounded-full py-5 pl-16 pr-6 shadow-xl outline-none text-lg placeholder:text-gray-400"
-                        />
+    <div className="bg-white rounded-[30px] shadow-xl px-8 py-8 border border-[#FFE5D8]">
+
+        <p className="text-sm uppercase tracking-widest text-[#FF7F66] font-semibold mb-4">
+
+            Quote of the Day
+
+        </p>
+
+        <h2 className="text-3xl font-bold text-gray-800 leading-relaxed">
+
+            "{randomQuote.quote}"
+
+        </h2>
+
+        <p className="mt-6 text-right text-gray-500 italic">
+
+            — {randomQuote.author}
+
+        </p>
+
+    </div>
+
+</div>
 
                     </div>
 
