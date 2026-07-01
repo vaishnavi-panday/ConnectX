@@ -11,6 +11,9 @@ const Profile = () => {
 
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [editPost, setEditPost] = useState(null);
+const [caption, setCaption] = useState("");
 
   const fetchProfile = async () => {
     try {
@@ -73,6 +76,41 @@ const Profile = () => {
       console.log(error);
     }
   };
+  const openEdit = (post) => {
+    setEditPost(post);
+    setCaption(post.caption);
+};
+const updatePost = async () => {
+
+    try{
+
+        await axios.put(
+
+            `https://connectx-evdy.onrender.com/api/post/${editPost._id}/post`,
+
+            {
+                caption
+            },
+
+            {
+                withCredentials:true
+            }
+
+        );
+
+        setEditPost(null);
+
+        fetchProfile();
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
   
   return (
     <>
@@ -385,14 +423,25 @@ const Profile = () => {
 
             {currentUser?.id === user?._id && (
 
-              <button
-                onClick={() => HandleDelete(post._id)}
-                className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition bg-white rounded-full w-10 h-10 shadow-lg hover:bg-red-500 hover:text-white"
-              >
-                🗑
-              </button>
+<div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
 
-            )}
+    <button
+        onClick={() => openEdit(post)}
+        className="bg-white rounded-full w-10 h-10 shadow-lg hover:bg-blue-500 hover:text-white transition"
+    >
+        ✏️
+    </button>
+
+    <button
+        onClick={() => HandleDelete(post._id)}
+        className="bg-white rounded-full w-10 h-10 shadow-lg hover:bg-red-500 hover:text-white transition"
+    >
+        🗑
+    </button>
+
+</div>
+
+)}
 
           </div>
 
@@ -442,11 +491,98 @@ const Profile = () => {
 
               </div>
 
-              <button className="text-[#FF7F66] hover:text-[#ff6245] font-semibold">
+              <button onClick={() => setSelectedPost(post)} className="text-[#FF7F66] hover:text-[#ff6245] font-semibold">
                 View →
               </button>
-
+              
             </div>
+            {selectedPost && (
+  <div
+    className="fixed inset-0 bg-black/80 z-50 flex justify-center items-center p-5"
+    onClick={() => setSelectedPost(null)}
+  >
+    <div
+      className="bg-white rounded-3xl overflow-hidden max-w-5xl w-full relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        onClick={() => setSelectedPost(null)}
+        className="absolute top-4 right-4 bg-white rounded-full w-10 h-10 shadow-lg hover:bg-red-500 hover:text-white transition"
+      >
+        ✕
+      </button>
+
+      <img
+        src={selectedPost.image}
+        className="w-full max-h-[75vh] object-contain bg-black"
+      />
+
+      <div className="p-6">
+
+        <h2 className="font-bold text-xl mb-3">
+          {user.username}
+        </h2>
+
+        <p className="text-gray-700">
+          {selectedPost.caption}
+        </p>
+
+        <div className="flex gap-8 mt-5">
+
+          <span>❤️ {selectedPost.likes.length}</span>
+
+          <span>💬 {selectedPost.comments.length}</span>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
+{editPost && (
+
+<div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+
+<div className="bg-white rounded-3xl p-8 w-[500px]">
+
+<h2 className="text-2xl font-bold mb-6">
+Edit Post
+</h2>
+
+<img
+src={editPost.image}
+className="rounded-2xl mb-5"
+/>
+
+<textarea
+value={caption}
+onChange={(e)=>setCaption(e.target.value)}
+className="w-full border rounded-xl p-4 h-36"
+/>
+
+<div className="flex justify-end gap-3 mt-6">
+
+<button
+onClick={()=>setEditPost(null)}
+className="px-5 py-2 rounded-xl border"
+>
+Cancel
+</button>
+
+<button
+onClick={updatePost}
+className="px-5 py-2 rounded-xl bg-[#FF7F66] text-white"
+>
+Save
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+)}
 
           </div>
 
