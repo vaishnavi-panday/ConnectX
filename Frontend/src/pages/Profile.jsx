@@ -97,10 +97,10 @@ const updatePost = async () => {
             }
 
         );
-
+        fetchProfile();
         setEditPost(null);
 
-        fetchProfile();
+        
 
     }
 
@@ -497,83 +497,176 @@ const updatePost = async () => {
               
             </div>
             {selectedPost && (
-  <div
-    className="fixed inset-0 bg-black/80 z-50 flex justify-center items-center p-5"
-    onClick={() => setSelectedPost(null)}
-  >
-    <div
-      className="bg-white rounded-3xl overflow-hidden max-w-5xl w-full relative"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
+<div className="fixed inset-0 bg-black/90 z-[999] flex justify-center items-center">
+
+    {/* Close */}
+    <button
         onClick={() => setSelectedPost(null)}
-        className="absolute top-4 right-4 bg-white rounded-full w-10 h-10 shadow-lg hover:bg-red-500 hover:text-white transition"
-      >
+        className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white text-black hover:scale-110 transition"
+    >
         ✕
-      </button>
+    </button>
 
-      <img
-        src={selectedPost.image}
-        className="w-full max-h-[75vh] object-contain bg-black"
-      />
+    <div className="bg-white rounded-3xl overflow-hidden w-[92%] max-w-6xl h-[90vh] flex">
 
-      <div className="p-6">
+        {/* IMAGE */}
 
-        <h2 className="font-bold text-xl mb-3">
-          {user.username}
-        </h2>
+        <div className="w-[65%] bg-black flex justify-center items-center">
 
-        <p className="text-gray-700">
-          {selectedPost.caption}
-        </p>
-
-        <div className="flex gap-8 mt-5">
-
-          <span>❤️ {selectedPost.likes.length}</span>
-
-          <span>💬 {selectedPost.comments.length}</span>
+            <img
+                src={selectedPost.image}
+                className="max-h-full max-w-full object-contain"
+            />
 
         </div>
 
-      </div>
+        {/* RIGHT SIDE */}
+
+        <div className="w-[35%] flex flex-col">
+
+            {/* Author */}
+
+            <div className="p-5 border-b flex gap-3 items-center">
+
+                <img
+                    src={selectedPost.author.profilepic}
+                    className="w-12 h-12 rounded-full"
+                />
+
+                <div>
+
+                    <h2 className="font-bold">
+                        {selectedPost.author.username}
+                    </h2>
+
+                    <p className="text-gray-500 text-sm">
+                        {new Date(selectedPost.createdAt).toLocaleDateString()}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {/* Caption */}
+
+            <div className="p-5 border-b">
+
+                <p className="leading-7 text-gray-700">
+                    {selectedPost.caption}
+                </p>
+
+            </div>
+
+            {/* COMMENTS */}
+
+            <div className="flex-1 overflow-y-auto p-5">
+
+                {selectedPost.comments.length === 0 ? (
+                    <p className="text-gray-400 text-center mt-10">
+                        No comments yet
+                    </p>
+                ) : (
+
+                    selectedPost.comments.map(comment=>(
+                        <div
+                            key={comment._id}
+                            className="mb-4 border rounded-2xl p-3"
+                        >
+
+                            <h3 className="font-semibold">
+                                {comment.user?.username || "User"}
+                            </h3>
+
+                            <p className="text-gray-600 mt-1">
+                                {comment.text}
+                            </p>
+
+                        </div>
+                    ))
+
+                )}
+
+            </div>
+
+            {/* FOOTER */}
+
+            <div className="border-t p-5">
+
+                <div className="flex justify-between">
+
+                    <span>
+                        ❤️ {selectedPost.likes.length}
+                    </span>
+
+                    <span>
+                        💬 {selectedPost.comments.length}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div>
+
+</div>
 )}
 {editPost && (
 
-<div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+<div className="fixed inset-0 bg-black/70 z-[999] flex justify-center items-center">
 
-<div className="bg-white rounded-3xl p-8 w-[500px]">
+<div className="bg-white rounded-3xl w-[500px] p-8">
 
-<h2 className="text-2xl font-bold mb-6">
+<h2 className="text-3xl font-bold mb-6">
 Edit Post
 </h2>
 
+<div className="flex justify-center">
+
 <img
 src={editPost.image}
-className="rounded-2xl mb-5"
+className="w-40 rounded-2xl mb-6 shadow"
 />
 
+</div>
+
 <textarea
+
 value={caption}
+
 onChange={(e)=>setCaption(e.target.value)}
-className="w-full border rounded-xl p-4 h-36"
-/>
+
+className="w-full border rounded-2xl p-4 h-36 resize-none"
+
+placeholder="Write something..."
+
+></textarea>
 
 <div className="flex justify-end gap-3 mt-6">
 
 <button
+
 onClick={()=>setEditPost(null)}
-className="px-5 py-2 rounded-xl border"
+
+className="px-6 py-3 rounded-xl border"
+
 >
+
 Cancel
+
 </button>
 
 <button
+
 onClick={updatePost}
-className="px-5 py-2 rounded-xl bg-[#FF7F66] text-white"
+
+className="px-6 py-3 rounded-xl bg-[#FF7F66] text-white"
+
 >
-Save
+
+Save Changes
+
 </button>
 
 </div>
