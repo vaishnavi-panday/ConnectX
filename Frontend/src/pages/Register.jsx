@@ -8,6 +8,7 @@ import {
   Camera,
   ArrowRight,
 } from "lucide-react";
+import { useAuth } from '../context/AuthContext';
 const Register = () => {
     const navigate = useNavigate()
  const { checkUser } = useAuth();
