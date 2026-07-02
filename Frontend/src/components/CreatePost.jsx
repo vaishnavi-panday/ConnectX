@@ -70,17 +70,7 @@ const CreatePost = () => {
             </div>
 
             <form onSubmit={HandleSubmit} className="space-y-6">
-              <div>
-                <label className="text-gray-700 font-medium mb-2 block">
-                  Caption
-                </label>
-
-                <div className="relative">
-                  <FileText
-                    size={20}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                  />
-                  {dailyPrompt && (
+              {dailyPrompt && (
                     <div className="rounded-2xl border border-[#FFD7C8] bg-[#FFF4ED] p-4">
                       <p className="flex items-center gap-2 text-sm font-bold text-[#E9684F]">
                         ✨ Responding to today’s prompt
@@ -91,6 +81,18 @@ const CreatePost = () => {
                       </p>
                     </div>
                   )}
+              <div>
+
+                <label className="text-gray-700 font-medium mb-2 block">
+                  Caption
+                </label>
+
+                <div className="relative">
+                  <FileText
+                    size={20}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                  />
+                  
                   <input
                     type="text"
                     name="caption"
