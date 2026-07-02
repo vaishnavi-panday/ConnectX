@@ -6,7 +6,7 @@ import { Image, FileText, ArrowRight } from "lucide-react";
 
 const CreatePost = () => {
   const navigate = useNavigate();
-
+   const [errors, setErrors] = useState({})
   const HandleSubmit = async (e) => {
     try {
       e.preventDefault();
