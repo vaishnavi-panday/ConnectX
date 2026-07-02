@@ -1,7 +1,9 @@
-import { Bell, Search } from "lucide-react";
+import { Bell } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 const FeedHero = () => {
   const { user } = useAuth();
@@ -21,7 +23,7 @@ const FeedHero = () => {
           "https://connectx-evdy.onrender.com/api/post/daily-prompt",
           { withCredentials: true },
         );
-
+       console.log("DAILY PROMPT RESPONSE:", res.data);
         setPrompt(res.data.prompt);
       } catch (error) {
         console.log(error);
