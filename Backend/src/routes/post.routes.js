@@ -19,4 +19,5 @@ router.get('/:id/user',authMiddleware.authUser , validationMiddleware.validateId
 router.get('/feed' , authMiddleware.authUser , postController.feed)
 router.put('/:id/post' , authMiddleware.authUser, validationMiddleware.validateIdParam, postController.editPost)
 router.delete('/:id/post' , authMiddleware.authUser , validationMiddleware.validateIdParam, postController.deletePost)
+router.get('/daily-prompt' , authMiddleware.authUser , postController.getTodayDailyPrompt)
 module.exports=router;

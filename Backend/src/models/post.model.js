@@ -41,6 +41,16 @@ const postSchema = mongoose.Schema({
     createdAt:{
         type:Date,
         default:Date.now
+    },
+    dailyPrompt:{
+        id:{
+            type:String,
+            default:null
+        },
+        text:{
+            type:String,
+            default:null
+        }
     }
     
 },{timestamps:true})

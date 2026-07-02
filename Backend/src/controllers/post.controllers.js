@@ -1,8 +1,9 @@
 const postModel = require('../models/post.model');
 const userModel = require('../models/user.model')
 const {uploadFiles} = require('../services/storage.services')
+const {getTodayPrompt} = require('../data/dailyPrompts')
 async function createPost(req,res){
-    const {caption} = req.body;
+    const {caption, dailyPromptId, dailyPromptText} = req.body;
     const file = req.file;
     if(!file){
        return  res.status(400).json({
@@ -14,7 +15,9 @@ async function createPost(req,res){
        caption,
        image:result.url,
        author:req.user.id,
+       dailyPrompt:dailyPromptId && dailyPromptText ? {id:dailyPromptId , text:dailyPromptText} : null
     })
+   
     res.status(201).json({
         message:"post created successfully",
         post:{
@@ -270,4 +273,11 @@ async function deletePost(req,res){
     }
 
 }
-module.exports={createPost , getAllPosts , getPostById, deletePost , likeDislikePost , commentOnPost ,getAllComments, deleteComment , getUsersPosts , feed , editPost , deletePost}
+async function getTodayDailyPrompt(req,res){
+    const prompt = getTodayPrompt();
+    return res.status(200).json({
+        message:"daily prompt",
+        prompt
+    })
+}
+module.exports={createPost , getAllPosts , getPostById, deletePost , likeDislikePost , commentOnPost ,getAllComments, deleteComment , getUsersPosts , feed , editPost , deletePost, getTodayDailyPrompt}
