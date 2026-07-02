@@ -37,7 +37,7 @@ const EditProfile = () => {
       if (
         error.response &&
         error.response.data &&
-        error.response.data.message
+        error.response.data.errors
       ) {
         const validationErrors = {};
         error.response.data.errors.forEach((err) => {
