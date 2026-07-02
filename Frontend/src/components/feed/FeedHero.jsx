@@ -23,7 +23,7 @@ const FeedHero = () => {
           "https://connectx-evdy.onrender.com/api/post/daily-prompt",
           { withCredentials: true },
         );
-       console.log("DAILY PROMPT RESPONSE:", res.data);
+        console.log("DAILY PROMPT RESPONSE:", res.data);
         setPrompt(res.data.prompt);
       } catch (error) {
         console.log(error);

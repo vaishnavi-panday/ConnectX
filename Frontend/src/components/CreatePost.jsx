@@ -1,18 +1,23 @@
-import React , {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Image, FileText, ArrowRight } from "lucide-react";
 
 const CreatePost = () => {
   const navigate = useNavigate();
-   const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
+  const location = useLocation();
+  const dailyPrompt = location.state?.dailyPrompt;
   const HandleSubmit = async (e) => {
     try {
       e.preventDefault();
 
       const formData = new FormData(e.target);
-
+      if (dailyPrompt) {
+        formData.append("dailyPromptId", dailyPrompt.id);
+        formData.append("dailyPromptText", dailyPrompt.text);
+      }
       await axios.post(
         "https://connectx-evdy.onrender.com/api/post/create",
         formData,
@@ -75,7 +80,17 @@ const CreatePost = () => {
                     size={20}
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                   />
+                  {dailyPrompt && (
+                    <div className="rounded-2xl border border-[#FFD7C8] bg-[#FFF4ED] p-4">
+                      <p className="flex items-center gap-2 text-sm font-bold text-[#E9684F]">
+                        ✨ Responding to today’s prompt
+                      </p>
 
+                      <p className="mt-2 text-base font-semibold text-gray-800">
+                        {dailyPrompt.text}
+                      </p>
+                    </div>
+                  )}
                   <input
                     type="text"
                     name="caption"

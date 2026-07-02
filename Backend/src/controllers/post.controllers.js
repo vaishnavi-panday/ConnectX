@@ -15,7 +15,8 @@ async function createPost(req,res){
        caption,
        image:result.url,
        author:req.user.id,
-       dailyPrompt:dailyPromptId && dailyPromptText ? {id:dailyPromptId , text:dailyPromptText} : null
+       dailyPrompt:dailyPromptId && dailyPromptText ? {id:dailyPromptId , text:dailyPromptText} : null,
+      
     })
    
     res.status(201).json({
