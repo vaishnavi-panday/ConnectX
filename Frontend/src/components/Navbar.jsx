@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Search, LogOut, Home, PlusCircle, User, MessageCircle } from "lucide-react";
@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
-
+  const [unreadCount, setUnreadCount] = useState(0);
   const handleSearch = async (e) => {
     const value = e.target.value;
 
@@ -50,6 +50,21 @@ const Navbar = () => {
       console.log(error);
     }
   };
+  const fetchUnreadCount = async () => {
+  try {
+    const res = await axios.get(
+      "https://connectx-evdy.onrender.com/api/message/unread-count",
+      { withCredentials: true }
+    );
+
+    setUnreadCount(res.data.unreadCount || 0);
+  } catch (error) {
+    console.log(error);
+  }
+};
+useEffect(() => {
+  fetchUnreadCount();
+}, []);
 
   return (
     <nav className="bg-white/80 backdrop-blur-md border-b border-[#FFE5D8] shadow-sm px-4 md:px-8 py-4 flex items-center justify-between sticky top-0 z-50">
@@ -154,13 +169,20 @@ const Navbar = () => {
     <span className="hidden lg:inline">Profile</span>
   </Link>
 
-  <Link
-    to="/message"
-    className="flex items-center gap-2 px-2 md:px-4 py-2 rounded-2xl hover:bg-[#FFF5EF] hover:text-[#FF7F66] transition"
-  >
-    <MessageCircle size={20} />
-    <span className="hidden lg:inline">Messages</span>
-  </Link>
+ <Link
+  to="/message"
+  className="relative flex items-center gap-2 px-2 md:px-4 py-2 rounded-2xl text-gray-700 hover:bg-[#FFF5EF] hover:text-[#FF7F66] transition"
+>
+  <MessageCircle size={20} />
+
+  <span className="hidden lg:inline">Messages</span>
+
+  {unreadCount > 0 && (
+    <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 flex items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold border-2 border-white">
+      {unreadCount > 99 ? "99+" : unreadCount}
+    </span>
+  )}
+</Link>
 
   <button
     onClick={handleLogout}

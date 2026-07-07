@@ -290,6 +290,48 @@ async function reactionOnMessage(req,res){
     return res.status(500).json({
        message:"something went wrong" 
     })
-}}
 
-module.exports = {sendMessage , getMessage , getAllChat , seenUnseen , deleteMessage,deleteForMeMessage , reactionOnMessage}
+}}
+async function getUnreadMessages(req,res){
+    try{
+        const unreadCount = await messageModel.countDocuments({
+            reciever:req.user.id,
+            read:false,
+        })
+        res.status(200).json({
+        message:"uread messages count",
+        unreadCount:unreadCount
+    })
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:"something went wrong"
+        })
+    }
+    
+}
+async function markMessagesAsRead(req,res){
+    try{
+        const senderId = req.params.id;
+        await messageModel.updateMany({
+            sender:senderId,
+            reciever:req.user.id,
+            read:false
+        },{
+            $set:{read:true}
+        }
+            
+        )
+        res.status(200).json({
+            message:"messages marked as read"
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:"something went wrong"
+        })
+    }
+
+}
+module.exports = {sendMessage , getMessage , getAllChat , seenUnseen , deleteMessage,deleteForMeMessage , reactionOnMessage, getUnreadMessages,markMessagesAsRead}

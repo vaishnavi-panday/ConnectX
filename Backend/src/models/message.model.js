@@ -37,6 +37,10 @@ const messageSchema = mongoose.Schema({
             type:String
         }
     }],
+    read: {
+      type: Boolean,
+      default: false,
+    },
     file:{
         type:String,
         default:""
