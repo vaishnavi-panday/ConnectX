@@ -176,9 +176,9 @@ async function seenUnseen(req, res){
     await messageModel.updateMany({
         sender:id,
         reciever:req.user.id,
-        seen:false
+        read:false
     },{
-        seen:true
+        read:true
     })
     getIo().to(senderSocketId).emit('messageseen')
     res.status(200).json({
