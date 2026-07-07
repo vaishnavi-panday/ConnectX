@@ -47,7 +47,8 @@ const ChatList = () => {
   fetchChats();
   fetchUnreadByUser();
 }, []);
-
+ console.log("CHATS:", chats);
+console.log("UNREAD BY USER:", unreadByUser);
   return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF8EE] via-white to-[#FFE5D8]">
 
