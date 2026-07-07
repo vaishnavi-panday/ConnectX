@@ -27,7 +27,7 @@ const ChatList = () => {
   const fetchUnreadByUser = async () => {
   try {
     const res = await axios.get(
-      "https://connectx-evdy.onrender.com/api/message/unread-by-user",
+      "https://connectx-evdy.onrender.com/api/message/unread-per-user",
       { withCredentials: true }
     );
 
