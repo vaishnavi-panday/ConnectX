@@ -327,8 +327,7 @@ async function getUnreadMessagePerUser(req,res){
             }
         }
     ])
-    console.log("UNREAD API RESPONSE:", res.data.unreadMessages);
-console.log("COUNTS OBJECT:", count);
+    
     return res.status(200).json({
         message:"unread messages per user",
         unreadMessages:unreadMessages
