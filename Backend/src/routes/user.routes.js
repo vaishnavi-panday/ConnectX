@@ -7,7 +7,7 @@ const multer = require('multer')
 const upload = multer({
     storage:multer.memoryStorage()
 });
-router.put('/updateprofile/:id',authMiddleware.authUser,upload.single("profilepic"),validationMiddleware.validateIdParam, validationMiddleware.validateEditProfile, userController.updateProfile )
+router.put('/updateprofile/:id',authMiddleware.authUser,upload.single("profilepic"),validationMiddleware.validateIdParam, validationMiddleware.validateEditProfile, validationMiddleware.validateImageUpload("profilepic", false), userController.updateProfile )
 router.get('/user/:id' , authMiddleware.authUser,validationMiddleware.validateIdParam , userController.getUserById);
 router.post('/:id/user', authMiddleware.authUser , validationMiddleware.validateIdParam, userController.followSomeone )
 router.get('/:id/followers' , authMiddleware.authUser , validationMiddleware.validateIdParam, userController.followersList)

@@ -7,7 +7,7 @@ const multer = require('multer')
 const upload = multer({
     storage:multer.memoryStorage()
 });
-router.post('/create',authMiddleware.authUser,upload.single("image"),validationMiddleware.validatePostCreation,postController.createPost)
+router.post('/create',authMiddleware.authUser,upload.single("image"),validationMiddleware.validatePostCreation,validationMiddleware.validateImageUpload("image" , true),postController.createPost)
 router.get('/getpost' , authMiddleware.authUser , postController.getAllPosts)
 router.get('/:id/getpost',authMiddleware.authUser,validationMiddleware.validateIdParam, postController.getPostById)
 router.delete('/:id/delete', authMiddleware.authUser, validationMiddleware.validateIdParam, postController.deletePost)

@@ -123,6 +123,7 @@ const CreatePost = () => {
                     type="file"
                     name="image"
                     className="w-full pl-12 pr-4 py-3 rounded-2xl border border-gray-200 bg-white shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-[#FF7F66] file:text-white hover:file:bg-[#ff6c4d]"
+                    accept="image/jpeg,image/png,image/jpg,image/webp"
                   />
                 </div>
               </div>

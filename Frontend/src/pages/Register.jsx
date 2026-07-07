@@ -165,6 +165,7 @@ const Register = () => {
                 type="file"
                 name="profilepic"
                 className="hidden"
+                accept="image/jpeg,image/png,image/jpg,image/webp"
               />
             </div>
 

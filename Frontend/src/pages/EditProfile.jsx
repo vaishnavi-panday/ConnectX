@@ -79,6 +79,7 @@ const EditProfile = () => {
                   type="file"
                   hidden
                   onChange={(e) => setProfilepic(e.target.files[0])}
+                  accept="image/jpeg,image/png,image/jpg,image/webp"
                 />
               </label>
             </div>

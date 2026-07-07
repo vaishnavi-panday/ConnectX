@@ -52,6 +52,27 @@ const validateCommentIdAndPostIdParam = [
     param('commentId').isMongoId().withMessage('Invalid comment ID'),
     validateRequest
 ]
+const validateImageUpload = (fieldName , required=true)=> [
+    check(fieldName).custom((value, { req }) => {
+        if (!req.file) {
+            if(required){
+                throw new Error('Image file is required');
+                
+            }
+            return true;
+        }
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg' , 'image/webp'];
+        if (!allowedMimeTypes.includes(req.file.mimetype)) {
+            throw new Error('Invalid image file type. Only JPEG, PNG, and JPG are allowed.');
+        }
+        const maxSizeInBytes = 5 * 1024 * 1024;
+        if (req.file.size > maxSizeInBytes) {
+            throw new Error('Image file size exceeds the maximum limit of 5MB.');
+        }
+        return true;
+    }),
+    validateRequest
+]
  module.exports = {
     validateUserRegistration,
     validateUserLogin,
@@ -62,5 +83,6 @@ const validateCommentIdAndPostIdParam = [
     validateCommentCreation,
     validateMessageIdParam,
     validatePostIdParam,
-    validateCommentIdAndPostIdParam
+    validateCommentIdAndPostIdParam,
+    validateImageUpload
 }
