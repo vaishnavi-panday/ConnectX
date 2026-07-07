@@ -64,6 +64,16 @@ const Navbar = () => {
 };
 useEffect(() => {
   fetchUnreadCount();
+
+  const refreshUnreadCount = () => {
+    fetchUnreadCount();
+  };
+
+  window.addEventListener("refreshUnreadCount", refreshUnreadCount);
+
+  return () => {
+    window.removeEventListener("refreshUnreadCount", refreshUnreadCount);
+  };
 }, []);
 
   return (

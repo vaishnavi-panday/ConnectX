@@ -162,6 +162,7 @@ useEffect(() => {
                 withCredentials: true
             }
         );
+        window.dispatchEvent(new Event("refreshUnreadCount"));
 
     }
 
