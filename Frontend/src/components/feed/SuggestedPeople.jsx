@@ -55,7 +55,7 @@ const handleFollow = async () => {
   try {
     await axios.post(`.../api/user/${id}/user`, {}, { withCredentials: true });
   } catch (error) {
-    setUser(prev => ({ ...prev, isFollowing: wasFollowing, follwersCount: prev.follwersCount + (wasFollowing ? 1 : -1) }));
+    setUsers(prev => ({ ...prev, isFollowing: wasFollowing, follwersCount: prev.follwersCount + (wasFollowing ? 1 : -1) }));
   }
 };
    console.log("users" , users)
