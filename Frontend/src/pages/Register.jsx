@@ -49,7 +49,7 @@ const Register = () => {
       <div className="max-w-7xl mx-auto min-h-screen grid lg:grid-cols-2">
         <div className="flex flex-col justify-center px-8 md:px-16">
           <div className="mb-10">
-            <h2 className="text-[#FF7F66] text-xl font-bold mb-2">SocialApp</h2>
+            <h2 className="text-[#FF7F66] text-xl font-bold mb-2">ConnectX</h2>
 
             <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-tight">
               Create
