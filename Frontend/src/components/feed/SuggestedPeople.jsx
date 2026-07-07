@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const SuggestedPeople = () => {
   const { user, checkUser } = useAuth();
-  
+
   const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
@@ -45,19 +45,25 @@ const suggested = res.data.users.filter(
     }
   };
 
-const handleFollow = async () => {
-  const wasFollowing = user.isFollowing;
-  setUsers(prev => ({
-    ...prev,
-    isFollowing: !wasFollowing,
-    follwersCount: prev.follwersCount + (wasFollowing ? -1 : 1),
-  }));
-  try {
-    await axios.post(`.../api/user/${id}/user`, {}, { withCredentials: true });
-  } catch (error) {
-    setUsers(prev => ({ ...prev, isFollowing: wasFollowing, follwersCount: prev.follwersCount + (wasFollowing ? 1 : -1) }));
-  }
-};
+  const handleFollow = async (id) => {
+    console.log("FOLLOW ID:", id);
+  
+    try {
+      await axios.post(
+        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+    await checkUser();
+    fetchUsers();
+    
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
    console.log("users" , users)
   return (
     <section className="max-w-7xl mx-auto px-8 mt-10">

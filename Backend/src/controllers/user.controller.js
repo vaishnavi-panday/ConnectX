@@ -52,7 +52,8 @@ console.log("PARAM:", req.params.id);
  const followedPerson = await userModel.findById(req.params.id)
  if(!user || !followedPerson){
     return res.status(400).json({
-        message:"bad request"
+        message:"bad request",
+        
     })
  }
  const following = user.following.find(id => id.toString() === req.params.id)
@@ -70,7 +71,8 @@ console.log("PARAM:", req.params.id);
  await user.save()
  await followedPerson.save()
  res.status(200).json({
-    message:"followed"
+    message:"followed",
+    following:user.following,
  })
 }
 async function followersList(req,res){
