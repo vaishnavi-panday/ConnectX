@@ -226,24 +226,22 @@ socket.on("reactionUpdated", (data) => {
 
 }, []);
 useEffect(() => {
-  if (!selectedUser?._id) return;
+  if (!id) return;
 
   const markChatAsRead = async () => {
     try {
       await axios.patch(
-        `https://connectx-evdy.onrender.com/api/message/${selectedUser._id}/read`,
+        `https://connectx-evdy.onrender.com/api/message/${id}/read`,
         {},
         { withCredentials: true }
       );
-
-      fetchUnreadCount();
     } catch (error) {
       console.log(error);
     }
   };
 
   markChatAsRead();
-}, [selectedUser]);
+}, [id]);
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF8EE] via-white to-[#FFE5D8]">
