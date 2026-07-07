@@ -2,6 +2,7 @@ const messageModel = require('../models/message.model');
 const userModel = require('../models/user.model');
 const { uploadFiles } = require('../services/storage.services');
 const {getReceiverSocketId ,getIo } = require('../socket/socket')
+const mongoose = require("mongoose");
 async function sendMessage(req, res){
     try{
     const reciever = req.params.id;
