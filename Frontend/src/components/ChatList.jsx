@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 
 const ChatList = () => {
   const [chats, setChats] = useState([]);
+  const [unreadByUser, setUnreadByUser] = useState({});
   const navigate = useNavigate();
 
   const fetchChats = async () => {
@@ -23,10 +24,29 @@ const ChatList = () => {
       console.log(error);
     }
   };
+  const fetchUnreadByUser = async () => {
+  try {
+    const res = await axios.get(
+      "https://connectx-evdy.onrender.com/api/message/unread-by-user",
+      { withCredentials: true }
+    );
 
-  useEffect(() => {
-    fetchChats();
-  }, []);
+    const counts = {};
+
+    res.data.unreadMessages.forEach((item) => {
+      counts[item._id] = item.unreadCount;
+    });
+
+    setUnreadByUser(counts);
+  } catch (error) {
+    console.log("Unread-by-user error:", error);
+  }
+};
+
+ useEffect(() => {
+  fetchChats();
+  fetchUnreadByUser();
+}, []);
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF8EE] via-white to-[#FFE5D8]">
@@ -82,9 +102,19 @@ const ChatList = () => {
               
               <div className="flex-1 min-w-0">
 
-                <h2 className="font-semibold text-gray-800">
-                  {chat.username}
-                </h2>
+                <div className="flex items-center gap-2">
+  <h2 className="font-semibold text-gray-800">
+    {chat.username}
+  </h2>
+
+  {unreadByUser[chat._id] > 0 && (
+    <span className="inline-flex min-w-5 h-5 items-center justify-center rounded-full bg-[#FF7F66] px-1 text-xs font-bold text-white">
+      {unreadByUser[chat._id] > 99
+        ? "99+"
+        : unreadByUser[chat._id]}
+    </span>
+  )}
+</div>
 
                 <p className="text-sm text-gray-500 truncate">
                   {chat.lastMessage || "No messages yet..."}

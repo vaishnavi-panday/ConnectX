@@ -310,28 +310,31 @@ async function getUnreadMessages(req,res){
     }
     
 }
-async function markMessagesAsRead(req,res){
+async function getUnreadMessagePerUser(req,res){
     try{
-        const senderId = req.params.id;
-        await messageModel.updateMany({
-            sender:senderId,
-            reciever:req.user.id,
-            read:false
-        },{
-            $set:{read:true}
+    const unreadMessages = await messageModel.aggregate([
+        {
+            $match:{
+                reciever:req.user.id,
+                read:false
+            },
+        },
+        {
+            $group:{
+                _id:"$sender",
+                unreadCount:{$sum:1},
+            }
         }
-            
-        )
-        res.status(200).json({
-            message:"messages marked as read"
-        })
-    }
-    catch(error){
+    ])
+    return res.status(200).json({
+        message:"unread messages per user",
+        unreadMessages:unreadMessages
+    })
+    } catch(error){
         console.log(error);
         return res.status(500).json({
             message:"something went wrong"
         })
-    }
-
+    } 
 }
-module.exports = {sendMessage , getMessage , getAllChat , seenUnseen , deleteMessage,deleteForMeMessage , reactionOnMessage, getUnreadMessages,markMessagesAsRead}
+module.exports = {sendMessage , getMessage , getAllChat , seenUnseen , deleteMessage,deleteForMeMessage , reactionOnMessage, getUnreadMessages, getUnreadMessagePerUser}

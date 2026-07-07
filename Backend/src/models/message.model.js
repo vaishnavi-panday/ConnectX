@@ -15,10 +15,6 @@ const messageSchema = mongoose.Schema({
     image:{
         type:String,
     },
-    seen:{
-        type:Boolean,
-        default:false
-    },
     deleteFor:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user"

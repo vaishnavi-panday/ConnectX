@@ -18,5 +18,5 @@ router.delete('/:msgId' , authMiddleware.authUser , validationMiddleware.validat
 router.patch('/:msgId' , authMiddleware.authUser , validationMiddleware.validateMessageIdParam, messageController.deleteForMeMessage)
 router.patch('/:msgId/react' , authMiddleware.authUser , validationMiddleware.validateMessageIdParam, messageController.reactionOnMessage)
 router.get('/unread-count' , authMiddleware.authUser , messageController.getUnreadMessages)
-router.patch('/:id/read' , authMiddleware.authUser , validationMiddleware.validateIdParam, messageController.markMessagesAsRead)
+router.get('/unread-per-user' , authMiddleware.authUser , messageController.getUnreadMessagePerUser)
 module.exports = router
