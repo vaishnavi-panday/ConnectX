@@ -225,23 +225,7 @@ socket.on("reactionUpdated", (data) => {
    };
 
 }, []);
-useEffect(() => {
-  if (!id) return;
 
-  const markChatAsRead = async () => {
-    try {
-      await axios.patch(
-        `https://connectx-evdy.onrender.com/api/message/${id}/read`,
-        {},
-        { withCredentials: true }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  markChatAsRead();
-}, [id]);
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-[#FFF8EE] via-white to-[#FFE5D8]">
@@ -284,7 +268,7 @@ useEffect(() => {
         ) : (
           messages.map((msg, index) => {
 
-            const isMe = msg.sender === user.id;
+            const isMe = msg.sender === user?.id;
 
             return (
               <div
@@ -345,9 +329,9 @@ useEffect(() => {
                 </div>
 
                 
-                {msg.reactions.length > 0 && (
+                {msg.reactions?.length > 0 && (
                   <div className="flex gap-1 mt-1 px-2">
-                    {msg.reactions.map((r) => (
+                    {msg.reactions?.map((r) => (
                       <span
                         key={r._id}
                         className="text-sm bg-white border border-[#FFE5D8] px-2 py-1 rounded-full shadow-sm"
