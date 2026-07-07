@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,  useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -8,15 +8,17 @@ const CreatePost = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isPosting, setIsPosting] = useState(false);
+  const postingRef = useRef(false);
   const location = useLocation();
   const dailyPrompt = location.state?.dailyPrompt;
   const HandleSubmit = async (e) => {
     e.preventDefault();
 
-    if (isPosting) return;
-
+    if (postingRef.current) return;
+    postingRef.current = true;
+    setIsPosting(true);
     try {
-      setIsPosting(true);
+      
 
       const formData = new FormData(e.target);
 
