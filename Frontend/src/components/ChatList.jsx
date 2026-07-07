@@ -18,7 +18,7 @@ const ChatList = () => {
       );
 
       setChats(res.data.chat);
-      console.log(res.data.chat);
+      
       
     } catch (error) {
       console.log(error);

@@ -315,7 +315,7 @@ async function getUnreadMessagePerUser(req,res){
     const unreadMessages = await messageModel.aggregate([
         {
             $match:{
-                reciever:req.user.id,
+                reciever:new mongoose.Types.ObjectId(req.user.id),
                 read:false
             },
         },
