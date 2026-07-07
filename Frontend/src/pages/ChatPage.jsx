@@ -346,7 +346,7 @@ socket.on("reactionUpdated", (data) => {
               
                 {isMe && index === messages.length - 1 && (
                   <p className="text-[10px] text-gray-400 mt-1 text-right">
-                    {msg.seen ? "Seen ✓✓" : "Sent ✓"}
+                    {msg.read ? "Seen ✓✓" : "Sent ✓"}
                   </p>
                 )}
 
