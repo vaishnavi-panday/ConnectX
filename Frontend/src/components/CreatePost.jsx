@@ -7,34 +7,45 @@ import { Image, FileText, ArrowRight } from "lucide-react";
 const CreatePost = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
+  const [isPosting, setIsPosting] = useState(false);
   const location = useLocation();
   const dailyPrompt = location.state?.dailyPrompt;
   const HandleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isPosting) return;
+
     try {
-      e.preventDefault();
+      setIsPosting(true);
 
       const formData = new FormData(e.target);
+
       if (dailyPrompt) {
         formData.append("dailyPromptId", dailyPrompt.id);
         formData.append("dailyPromptText", dailyPrompt.text);
       }
+
       await axios.post(
         "https://connectx-evdy.onrender.com/api/post/create",
         formData,
-        {
-          withCredentials: true,
-        },
+        { withCredentials: true },
       );
 
       navigate("/feed");
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.errors) {
+      if (error.response?.data?.errors) {
         const validationErrors = {};
+
         error.response.data.errors.forEach((err) => {
           validationErrors[err.path] = err.msg;
         });
+
         setErrors(validationErrors);
+      } else {
+        console.log(error);
       }
+    } finally {
+      setIsPosting(false);
     }
   };
   const clearError = (field) => {
@@ -71,18 +82,17 @@ const CreatePost = () => {
 
             <form onSubmit={HandleSubmit} className="space-y-6">
               {dailyPrompt && (
-                    <div className="rounded-2xl border border-[#FFD7C8] bg-[#FFF4ED] p-4">
-                      <p className="flex items-center gap-2 text-sm font-bold text-[#E9684F]">
-                        ✨ Responding to today’s prompt
-                      </p>
+                <div className="rounded-2xl border border-[#FFD7C8] bg-[#FFF4ED] p-4">
+                  <p className="flex items-center gap-2 text-sm font-bold text-[#E9684F]">
+                    ✨ Responding to today’s prompt
+                  </p>
 
-                      <p className="mt-2 text-base font-semibold text-gray-800">
-                        {dailyPrompt.text}
-                      </p>
-                    </div>
-                  )}
+                  <p className="mt-2 text-base font-semibold text-gray-800">
+                    {dailyPrompt.text}
+                  </p>
+                </div>
+              )}
               <div>
-
                 <label className="text-gray-700 font-medium mb-2 block">
                   Caption
                 </label>
@@ -92,7 +102,7 @@ const CreatePost = () => {
                     size={20}
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                   />
-                  
+
                   <input
                     type="text"
                     name="caption"
@@ -130,10 +140,16 @@ const CreatePost = () => {
 
               <button
                 type="submit"
-                className="w-full bg-[#FF7F66] hover:bg-[#ff6c4d] transition-all duration-300 text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                disabled={isPosting}
+                className={`w-full py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 shadow-lg transition-all duration-300
+    ${
+      isPosting
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#FF7F66] hover:bg-[#ff6c4d] hover:shadow-xl hover:-translate-y-1 text-white"
+    }`}
               >
-                Publish Post
-                <ArrowRight size={18} />
+                {isPosting ? "Publishing..." : "Publish Post"}
+                {!isPosting && <ArrowRight size={18} />}
               </button>
             </form>
           </div>
