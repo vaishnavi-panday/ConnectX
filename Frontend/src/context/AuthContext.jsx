@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { connectSocket } from "../socket/socket";
+import api from "../api/axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -14,13 +15,11 @@ export const AuthProvider = ({ children }) => {
 
   const checkUser = async () => {
     try {
-      const response = await axios.get(
-        "https://connectx-evdy.onrender.com/api/auth/me",
-        {
-          withCredentials: true,
-        }
+      const response = await api.get(
+        "/auth/me",
+        
       );
-      console.log( response.data);
+      
       
       setUser(response.data.details);
       setIsAuthenticated(true);

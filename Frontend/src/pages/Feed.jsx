@@ -8,6 +8,7 @@ import StoryBar from '../components/feed/StoryBar';
 import FeedHeader from '../components/feed/FeedHeader';
 import SuggestedPeople from '../components/feed/SuggestedPeople';
 import FeedPosts from '../components/feed/FeedPosts';
+import api from '../api/axios';
 const Feed = () => {
     
   
@@ -16,10 +17,8 @@ const Feed = () => {
      
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(
-          "https://connectx-evdy.onrender.com/api/post/feed",{
-            withCredentials:true
-          }
+        const res = await api.get(
+          "/post/feed",
         );
        console.log(res.data)
         setPosts(res.data.feed);

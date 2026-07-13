@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { User, Mail, Lock, Camera, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import api from "../api/axios";
 const Register = () => {
   const navigate = useNavigate();
   const { checkUser } = useAuth();
@@ -12,12 +13,10 @@ const Register = () => {
 
     const formData = new FormData(e.target);
     try {
-      await axios.post(
-        "https://connectx-evdy.onrender.com/api/auth/register",
+      await api.post(
+        "/auth/register",
         formData,
-        {
-          withCredentials: true,
-        },
+        
       );
 
       await checkUser();

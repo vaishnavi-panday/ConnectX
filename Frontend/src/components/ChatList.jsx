@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import api from "../api/axios";
 
 const ChatList = () => {
   const [chats, setChats] = useState([]);
@@ -10,8 +11,8 @@ const ChatList = () => {
 
   const fetchChats = async () => {
     try {
-      const res = await axios.get(
-        "https://connectx-evdy.onrender.com/api/message/chats",
+      const res = await api.get(
+        "/message/chats",
         {
           withCredentials: true,
         }
@@ -26,8 +27,8 @@ const ChatList = () => {
   };
   const fetchUnreadByUser = async () => {
   try {
-    const res = await axios.get(
-      "https://connectx-evdy.onrender.com/api/message/unread-per-user",
+    const res = await api.get(
+      "/message/unread-per-user",
       { withCredentials: true }
     );
 

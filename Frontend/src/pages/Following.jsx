@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import api from "../api/axios";
 
 const Following = () => {
   const { id } = useParams();
@@ -10,8 +11,8 @@ const Following = () => {
 
   const fetchFollowing = async () => {
     try {
-      const res = await axios.get(
-        `https://connectx-evdy.onrender.com/api/user/${id}/following`,
+      const res = await api.get(
+        `/user/${id}/following`,
         {
           withCredentials: true,
         }

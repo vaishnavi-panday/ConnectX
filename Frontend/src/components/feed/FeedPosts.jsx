@@ -1,17 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
+import api from "../../api/axios";
 
 const FeedPosts = ({ posts, fetchPosts }) => {
   const { user } = useAuth();
   const [openCommentPost, setOpenCommentPost] = useState(null);
 
   const handleLike = async (id) => {
-    await axios.patch(
-      `https://connectx-evdy.onrender.com/api/post/${id}/likes`,
-      {},
-      { withCredentials: true },
-    );
+    await api.patch(`/post/${id}/likes`);
 
     fetchPosts();
   };
@@ -21,23 +18,16 @@ const FeedPosts = ({ posts, fetchPosts }) => {
 
     const formData = new FormData(e.target);
 
-    await axios.post(
-      `https://connectx-evdy.onrender.com/api/post/${postId}/comment`,
-      {
-        text: formData.get("comment"),
-      },
-      { withCredentials: true },
-    );
+    await api.post(`/post/${postId}/comment`, {
+      text: formData.get("comment"),
+    });
 
     e.target.reset();
     fetchPosts();
   };
 
   const deleteComment = async (postId, commentId) => {
-    await axios.delete(
-      `https://connectx-evdy.onrender.com/api/post/${postId}/comment/${commentId}`,
-      { withCredentials: true },
-    );
+    await api.delete(`/post/${postId}/comment/${commentId}`);
 
     fetchPosts();
   };

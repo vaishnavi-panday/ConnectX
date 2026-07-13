@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import { Image, FileText, ArrowRight } from "lucide-react";
+import api from "../api/axios";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -27,10 +28,10 @@ const CreatePost = () => {
         formData.append("dailyPromptText", dailyPrompt.text);
       }
 
-      await axios.post(
-        "https://connectx-evdy.onrender.com/api/post/create",
+      await api.post(
+        "/post/create",
         formData,
-        { withCredentials: true },
+        
       );
 
       navigate("/feed");

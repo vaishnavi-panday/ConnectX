@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
+import api from "../../api/axios";
 
 const SuggestedPeople = () => {
   const { user, checkUser } = useAuth();
@@ -18,11 +19,9 @@ const SuggestedPeople = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(
-        "https://connectx-evdy.onrender.com/api/user/all",
-        {
-          withCredentials: true,
-        }
+      const res = await api.get(
+        "/user/all",
+        
       );
       
 
@@ -39,22 +38,19 @@ const suggested = res.data.users.filter(
 );
 
       setUsers(suggested);
-      console.log("USER LIST:", users);
+      
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleFollow = async (id) => {
-    console.log("FOLLOW ID:", id);
+    
   
     try {
-      await axios.post(
-        `https://connectx-evdy.onrender.com/api/user/${id}/user`,
-        {},
-        {
-          withCredentials: true,
-        }
+      await api.post(
+        `/user/${id}/user`,
+        
       );
     await checkUser();
     fetchUsers();

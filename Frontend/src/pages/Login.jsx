@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { User, Lock, ArrowRight } from "lucide-react";
+import api from "../api/axios";
 const Login = () => {
   const { checkUser } = useAuth();
   const navigate = useNavigate();
@@ -16,12 +17,8 @@ const Login = () => {
       password: formData.get("password"),
     };
     try {
-      await axios.post(
-        "https://connectx-evdy.onrender.com/api/auth/login",
-        data,
-        {
-          withCredentials: true,
-        },
+      await api.post(
+        "/auth/login",data
       );
       await checkUser();
       navigate("/feed");

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
 
 const EditProfile = () => {
   const { user, checkUser } = useAuth();
@@ -22,12 +23,10 @@ const EditProfile = () => {
         formData.append("profilepic", profilepic);
       }
 
-      await axios.put(
-        `https://connectx-evdy.onrender.com/api/user/updateprofile/${user.id}`,
+      await api.put(
+        `/user/updateprofile/${user.id}`,
         formData,
-        {
-          withCredentials: true,
-        },
+        
       );
 
       await checkUser();
