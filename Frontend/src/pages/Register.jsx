@@ -41,9 +41,9 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF8EE] overflow-hidden relative">
-      <div className="absolute w-[500px] h-[500px] bg-[#FFD7C8] rounded-full blur-[150px] opacity-40 -top-40 -right-40" />
+      <div className="pointer-events-none absolute w-[500px] h-[500px] bg-[#FFD7C8] rounded-full blur-[150px] opacity-40 -top-40 -right-40" />
 
-      <div className="absolute w-[400px] h-[400px] bg-pink-200 rounded-full blur-[150px] opacity-20 bottom-0 left-0" />
+      <div className="pointer-events-none absolute w-[400px] h-[400px] bg-pink-200 rounded-full blur-[150px] opacity-20 bottom-0 left-0" />
 
       <div className="max-w-7xl mx-auto min-h-screen grid lg:grid-cols-2">
         <div className="flex flex-col justify-center px-8 md:px-16">
