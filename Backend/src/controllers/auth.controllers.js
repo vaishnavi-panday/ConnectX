@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { uploadFiles } = require('../services/storage.services.js');
 
 async function registerUser(req,res){
+    console.log("Register API HIT");
     const {username , email , password} = req.body; 
     // destructure data as req.body me data object form me aata hai 
     const file = req.file;
